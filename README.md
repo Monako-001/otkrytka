@@ -1,2 +1,134 @@
 # otkrytka
 для любимого котика
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для тебя ❤️</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #fce3ec, #ffd6e0, #ffc2d1);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 30px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.3);
+            border: 2px solid white;
+            max-width: 400px;
+            position: relative;
+        }
+        img {
+            width: 220px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #d6336c;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #444;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            transition: color 0.3s;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            height: 60px; /* Фиксируем высоту, чтобы карточка не прыгала */
+        }
+        button {
+            padding: 12px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+        }
+        #yesBtn:hover {
+            background-color: #ff758f;
+            transform: scale(1.1);
+        }
+        #noBtn {
+            background-color: #e0e0e0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <!-- ВСТАВЬ СЮДА НАЗВАНИЕ СВОЕЙ КАРТИНКИ ВМЕСТО "НАЗВАНИЕ_ТВОЕЙ_КАРТИНКИ.jpg" -->
+        <img src="НАЗВАНИЕ_ТВОЕЙ_КАРТИНКИ.jpg" alt="Для тебя">
+        
+        <h1>Привет, мой родной ❤️</h1>
+        <p id="questionText">Я хоть и не айтишник и в коде ничего не понимаю, но для тебя я готова хоть сайты писать с нуля.<br><br>
+        Ты пойдёшь со мной на свидание?</p>
+        
+        <div class="buttons">
+            <button id="yesBtn" onclick="alert('Урааа! Я знала! Я самая счастливая на свете ❤️')">Да</button>
+            <button id="noBtn" onclick="changeNoButton()">Нет</button>
+        </div>
+    </div>
+
+    <script>
+        // Тексты, которые будут появляться при нажатии на "Нет"
+        const texts = [
+            "Ты серьезно? 😳",
+            "Ты уверен? 🥺",
+            "Подумай еще раз! 😢",
+            "Может, всё-таки да? 🥰",
+            "Не будь таким! 💔",
+            "Кнопка 'Нет' сломалась... 🛠️"
+        ];
+        
+        let clickCount = 0;
+
+        function changeNoButton() {
+            const noBtn = document.getElementById('noBtn');
+            const questionText = document.getElementById('questionText');
+
+            if (clickCount < texts.length) {
+                // Меняем текст вопроса на новый из массива
+                questionText.innerHTML = texts[clickCount];
+                
+                // Уменьшаем кнопку "Нет"
+                let currentSize = 100 - (clickCount * 15); // Она будет уменьшаться на 15% каждый раз
+                noBtn.style.transform = `scale(${currentSize / 100})`;
+                
+                clickCount++;
+            } else {
+                // Когда тексты закончатся, кнопка "Нет" исчезает
+                noBtn.style.display = 'none';
+                
+                // Возвращаем текст вопроса
+                questionText.innerHTML = "Ты пойдёшь со мной на свидание? Только честно! ❤️";
+            }
+        }
+    </script>
+
+</body>
+</html>
